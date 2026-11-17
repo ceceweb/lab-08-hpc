@@ -94,8 +94,6 @@ def upload_summary(key, summary, genre, job):
         raise
     finally:
         client.close()
-    raise NotImplementedError("upload_summary")
-
 
 def main():
     """Summarize book number TASK_ID of BOOK_LIST and save the result in MongoDB."""
