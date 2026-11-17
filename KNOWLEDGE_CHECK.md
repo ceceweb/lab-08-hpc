@@ -12,7 +12,7 @@ Redirect the command's output to `results/job-history.txt` and include the file 
 
 **Your answer:** Provide the entire command you used, including all CLI options.
 
-...
+sacct -S 2026-11-04 -X --format=JobID,JobName,NodeList,Partition,Account,User,State,Start,Elapsed > results/job-history.txt
 
 ## 2. Slurm: did every array task run at the same time?
 
@@ -24,7 +24,7 @@ You submitted your entire job array with one `sbatch` command, but Slurm schedul
 
 **Your answer:** Did all tasks in the array start at the same time? Was the elapsed time identical for every task? Explain why or why not.
 
-...
+They did not all start at the same time but instead they ran in overlapping waves. They were competing for access to the space on the 32 GPU slices and not only did my other tasks take up space, but other people connected to HPC were also in the queue for GPU slices as well. The elapsed time was not the same for every task, because some books were longer than others. 
 
 ## 3. Slurm: did my job use what it asked for?
 
@@ -36,5 +36,5 @@ Suppose your next job array has 1,000 books instead of 101. Before you submit it
 
 **Your answer:** How much memory and time did the task use, compared with what your script asked for? What would you change in your script, and why?
 
-...
+The task took 1.59 GB, 13 s, with 19 s for the slowest compared with what we asked for which was 16 GB and 5 minutes. I would change it to 4 GB and 3 minutes which should be plenty, but will account for an occasional very large text just to be safe. These smaller requests can start sooner and leave resources for others, but this margin leaves room in case tasks are larger than expected.
 
